@@ -4,3 +4,5 @@ __pycache__/
 .env
 *.tfstate*
 .terraform/
+terraform/ai-platform-config
+*.kubeconfig
