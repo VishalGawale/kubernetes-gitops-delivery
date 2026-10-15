@@ -8,3 +8,6 @@ configMapGenerator:
     behavior: merge
     literals:
       - APP_ENV=dev
+replicas:
+  - name: ai-platform
+    count: 2
