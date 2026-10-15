@@ -1,0 +1,37 @@
+replicaCount: 1
+
+image:
+  repository: ai-platform
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8000
+
+config:
+  APP_ENV: dev
+  LOG_LEVEL: info
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+probes:
+  path: /healthz
+  startup:
+    periodSeconds: 5
+    failureThreshold: 30
+    timeoutSeconds: 5
+  liveness:
+    periodSeconds: 10
+    failureThreshold: 3
+    timeoutSeconds: 5
+  readiness:
+    periodSeconds: 10
+    failureThreshold: 3
+    timeoutSeconds: 5
