@@ -1,4 +1,4 @@
-# ai-platform-gitops
+# Kubernetes GitOps Delivery
 
 A small FastAPI service delivered to a local Kubernetes cluster through a GitOps workflow: Terraform builds the environment, a Helm chart packages the app, kustomize overlays define dev and prod, and ArgoCD syncs both from this repository.
 
@@ -8,7 +8,7 @@ This is a **local personal project** running on a kind cluster on a laptop. It i
 
 ```mermaid
 flowchart LR
-    dev["Developer"] -->|git push| repo[("GitHub repo<br/>ai-platform-gitops")]
+    dev["Developer"] -->|git push| repo[("GitHub repo<br/>kubernetes-gitops-delivery")]
 
     subgraph local["Local machine: Docker Desktop + kind cluster"]
         tf["Terraform"] -->|provisions| cluster["kind cluster"]

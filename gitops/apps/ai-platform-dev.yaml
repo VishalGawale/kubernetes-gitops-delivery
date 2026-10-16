@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/VishalGawale/ai-platform-gitops.git
+    repoURL: https://github.com/VishalGawale/kubernetes-gitops-delivery.git
     targetRevision: main
     path: gitops/overlays/dev
   destination:
