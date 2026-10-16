@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring
+resources:
+  - prometheus.yaml
+  - grafana.yaml
+configMapGenerator:
+  - name: prometheus-config
+    files:
+      - prometheus.yml=config/prometheus.yml
+      - alerts.yml=config/alerts.yml
+  - name: grafana-datasource
+    files:
+      - datasource.yaml=config/grafana-datasource.yaml
+  - name: grafana-dashboard-provider
+    files:
+      - provider.yaml=config/grafana-dashboard-provider.yaml
+  - name: grafana-dashboards
+    files:
+      - ai-platform.json=config/ai-platform-dashboard.json

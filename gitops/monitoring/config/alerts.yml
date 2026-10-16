@@ -1,0 +1,14 @@
+groups:
+  - name: ai-platform
+    rules:
+      - alert: HighErrorRate
+        expr: |
+          sum by (environment) (rate(http_requests_total{status=~"5..",path!~"/healthz|/metrics"}[5m]))
+            /
+          sum by (environment) (rate(http_requests_total{path!~"/healthz|/metrics"}[5m]))
+            > 0.05
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: Error rate above 5 percent for 2 minutes

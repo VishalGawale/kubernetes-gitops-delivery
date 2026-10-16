@@ -1,0 +1,22 @@
+rule_files:
+  - ../config/alerts.yml
+evaluation_interval: 1m
+tests:
+  - interval: 1m
+    input_series:
+      - series: 'http_requests_total{environment="dev",method="POST",path="/predict",status="200"}'
+        values: '0+10x15'
+      - series: 'http_requests_total{environment="dev",method="POST",path="/predict",status="500"}'
+        values: '0+2x15'
+    alert_rule_test:
+      - eval_time: 12m
+        alertname: HighErrorRate
+        exp_alerts:
+          - exp_labels:
+              severity: warning
+              environment: dev
+            exp_annotations:
+              summary: Error rate above 5 percent for 2 minutes
+      - eval_time: 1m
+        alertname: HighErrorRate
+        exp_alerts: []
