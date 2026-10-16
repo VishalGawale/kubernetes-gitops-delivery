@@ -6,10 +6,14 @@ rule_files:
 scrape_configs:
   - job_name: ai-platform
     metrics_path: /metrics
-    static_configs:
-      - targets: ["ai-platform.dev.svc.cluster.local:8000"]
-        labels:
-          environment: dev
-      - targets: ["ai-platform.prod.svc.cluster.local:8000"]
-        labels:
-          environment: prod
+    dns_sd_configs:
+      - names:
+          - ai-platform-metrics.dev.svc.cluster.local
+          - ai-platform-metrics.prod.svc.cluster.local
+        type: A
+        port: 8000
+        refresh_interval: 30s
+    relabel_configs:
+      - source_labels: [__meta_dns_name]
+        regex: ai-platform-metrics\.([a-z]+)\.svc\.cluster\.local
+        target_label: environment
