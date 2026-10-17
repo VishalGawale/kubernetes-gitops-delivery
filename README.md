@@ -133,7 +133,3 @@ Always pass `--context kind-ai-platform` to kubectl and `--kube-context kind-ai-
 
 - Sealed Secrets for committing secrets safely to Git.
 - A runbook: deploy, roll back through ArgoCD, and what to do when the node stalls.
-
-## Not covered
-
-OpenShift. This is plain Kubernetes.
